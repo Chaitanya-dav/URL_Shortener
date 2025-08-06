@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;  
+        }
+        body{
+            width: 100%;
+            height: 100%;
+        }
+        .container{
+            background-color: rgb(181, 221, 21);
+            padding: 5rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            row-gap: 1.1cm;
+            
+        }
+        .item{
+            height: 150px;
+            width: 150px;
+            background-color: aqua;
+            border: 3px solid black;
+        }
+        #RotateX:hover{
+             transform: rotateX(45deg);
+             transition: 1000ms
+        }
+          #RotateY:hover{
+            transform: rotateY(45deg);
+            transition: 1000ms
+        }
+          #RotateZ:hover{
+            transform: rotateZ(45deg);
+            transition: 1000ms
+        }
+        
+        #TranslateX:hover{
+           transform: translateX(45px);
+           transition: 1000ms
+        }
+        #TranslateY:hover{
+            transform:  translateY(45px);
+            transition: 1000ms
+        }
+        #TranslateZ:hover{
+            transform:  perspective(200px) translateZ(45px);
+            transition: 1000ms    
+        }
+        #ScaleX:hover{
+             transform:  scaleX(2);
+            transition: 1000ms
+
+        }
+           #ScaleY:hover{
+             transform:  scaleY(2);
+            transition: 1000ms
+            
+        }
+           #ScaleZ:hover{
+             transform:  perspective(200px) scaleZ(2) rotateY(45deg);
+            transition: 1000ms
+            
+        }
+        .image{
+           
+            object-position: center;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item" id="RotateX">RotateX</div>
+        <div class="item" id="RotateY">RotateY</div>
+        <div class="item" id="RotateZ">RotateZ</div>
+        <div class="item" id="TranslateX">TranslateX</div>
+        <div class="item" id ="TranslateY">TranslateY</div>
+        <div class="item" id ="TranslateZ"> <img src="https://i.pinimg.com/736x/90/bd/97/90bd9716e1880b945b61515d56fd0390.jpg" alt="zenitsu" class ="image"></div>
+        <div class="item" id ="ScaleX">ScaleX</div>
+        <div class="item" id="ScaleY">ScaleY</div>
+        <div class="item" id="ScaleZ">ScaleZ</div>
+    </div>
+    
+</body>
+</html>
