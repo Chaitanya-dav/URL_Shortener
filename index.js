@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const Url = require('./models/url');
+const {Url} = require('./models/url');
 const path = require('path');
 const connectDB = require('./connect');
 connectDB('mongodb://localhost:27017/shortUrlDB').then(()=>{
@@ -9,7 +9,7 @@ connectDB('mongodb://localhost:27017/shortUrlDB').then(()=>{
 
 app.use(express.json());
 app.use('/url', require('./routes/url'));
-app.get('/fpage',async (req,res)=>{
+app.get('/',async (req,res)=>{
    const urls = await Url.find({});
    return res.status(200).end( `
     <html>
@@ -22,7 +22,7 @@ app.get('/fpage',async (req,res)=>{
     <button type="submit">Shorten URL</button>
     </form>
     <ol>
-    ${urls.map(url => `<li> originalurl : <a href="${url.originalUrl}" target = "_blank">${url.originalUrl}</a> - shorturl : <a href="http://localhost:3000/fpage/${url.shortID}" target = "_blank">http://localhost:3000/fpage/${url.shortID}</a></li>`).join('')}
+    ${urls.map(url => `<li> originalurl : <a href="${url.originalUrl}" target = "_blank">${url.originalUrl}</a> - shorturl : <a href="http://localhost:3000/${url.shortID}" target = "_blank">http://localhost:3000/${url.shortID}</a></li>`).join('')}
     </ol>
     </body>
     <script>
@@ -46,7 +46,7 @@ app.get('/fpage',async (req,res)=>{
 })
 
 
-app.get('/fpage/:shortId', async (req,res)=>{
+app.get('/:shortId', async (req,res)=>{
     const shortId = req.params.shortId;
     const entry = await Url.findOne({shortID:shortId});
     if(entry){
@@ -54,5 +54,5 @@ app.get('/fpage/:shortId', async (req,res)=>{
     }
 });
 app.listen(3000,()=>{
-    console.log("Server is running on port http://localhost:3000/fpage");
+    console.log("Server is running on port http://localhost:3000/");
 })
