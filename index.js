@@ -1,16 +1,23 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 const {Url} = require('./models/url');
 const path = require('path');
-const connectDB = require('./connect');
-connectDB('mongodb://localhost:27017/shortUrlDB').then(()=>{
+
+
+
+
+mongoose.connect('mongodb://localhost:27017/shortUrlDB').then(()=>{
     console.log('connected to DB');
 });
 
 app.use(express.json());
 app.use('/url', require('./routes/url'));
+
+
+
 app.get('/',async (req,res)=>{
-   const urls = await Url.find({});
+    const urls = await Url.find({});
    return res.status(200).end( `
     <html>
     <head><title>URL Shortner</title></head>
