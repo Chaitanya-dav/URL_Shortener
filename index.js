@@ -4,16 +4,16 @@ const app = express();
 const {Url} = require('./models/url');
 const path = require('path');
 
-
-
+const userRoute = require('./routes/url');
+const urlRoute = require('./routes/url');
 
 mongoose.connect('mongodb://localhost:27017/shortUrlDB').then(()=>{
     console.log('connected to DB');
 });
 
 app.use(express.json());
-app.use('/url', require('./routes/url'));
-
+app.use('/url', urlRoute);
+app.use("/user", userRoute);
 
 
 app.get('/',async (req,res)=>{
@@ -32,6 +32,7 @@ app.get('/',async (req,res)=>{
     ${urls.map(url => `<li> originalurl : <a href="${url.originalUrl}" target = "_blank">${url.originalUrl}</a> - shorturl : <a href="http://localhost:3000/${url.shortID}" target = "_blank">http://localhost:3000/${url.shortID}</a></li>`).join('')}
     </ol>
     </body>
+    <footer>&copy;URL Shortener</footer>
     <script>
     document.querySelector('form').addEventListener('submit', async (e)=>{
         e.preventDefault();
