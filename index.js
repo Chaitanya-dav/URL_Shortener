@@ -4,16 +4,15 @@ const app = express();
 const {Url} = require('./models/url');
 const path = require('path');
 
-const userRoute = require('./routes/url');
-const urlRoute = require('./routes/url');
+const {createUser} = require('./controllers/url');
 
 mongoose.connect('mongodb://localhost:27017/shortUrlDB').then(()=>{
     console.log('connected to DB');
 });
 
 app.use(express.json());
-app.use('/url', urlRoute);
-app.use("/user", userRoute);
+app.use('/', require('./routes/url'));
+app.post('/user',createUser);
 
 
 app.get('/',async (req,res)=>{
@@ -51,7 +50,7 @@ app.get('/',async (req,res)=>{
 
     </script>
     </html>`)
-})
+});
 
 
 app.get('/:shortId', async (req,res)=>{
@@ -61,6 +60,7 @@ app.get('/:shortId', async (req,res)=>{
     return res.redirect(entry.originalUrl);
     }
 });
+
 app.listen(3000,()=>{
     console.log("Server is running on port http://localhost:3000/");
-})
+});

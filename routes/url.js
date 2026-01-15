@@ -1,8 +1,8 @@
 const express = require('express');
-const {createShortUrl} = require('../controllers/url');
-const {createUser} = require('../controllers/user');
+const {createShortUrl,createUser} = require('../controllers/url');
 const router = express.Router();
 
-router.post("/", createShortUrl);
-router.post("/",createUser);
+router.post("/url", createShortUrl);
+router.post("/user",createUser);
+
 module.exports = router;
