@@ -1,8 +1,8 @@
 const express = require('express');
-const {createShortUrl,createUser} = require('../controllers/url');
+const {createShortUrl, signupUser} = require('../controllers/url');
 const router = express.Router();
 
 router.post("/url", createShortUrl);
-router.post("/user",createUser);
+router.post("/user",signupUser);
 
 module.exports = router;

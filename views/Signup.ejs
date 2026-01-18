@@ -1,0 +1,39 @@
+<html>
+        <head> <title>SignUp Page</title></head>
+        <body>
+          <h1>Sign Up</h1>
+          <form method = "POST" action = "/user">
+            <label>Name:</label>
+            <input type="text" name="name" placeholder="Enter your name" required/>
+            <br>
+            <label>Email:</label>
+            <input type="email" name="email" placeholder="Enter your email" required/>  
+            <br>
+            <label>Password:</label>
+            <input type="password" name="password" placeholder="Enter your password" required/>
+            <br>
+            <button type="submit">Sign Up</button>
+            </form>
+
+
+        </body>
+            <script>
+    document.querySelector('form').addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        const name = e.target.name.value;
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        const res = await fetch('/user',{
+            method : 'POST',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify({name, email, password}),
+        });
+        const data = await res.json();
+        alert('User Signed Up: ' + data.name );
+        window.location.reload();
+    });
+        </script>
+        <footer>&copy;URL Shortener</footer>
+        </html>

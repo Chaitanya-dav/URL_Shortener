@@ -1,0 +1,42 @@
+ <html>
+    <head><title>URL Shortner</title></head>
+    <body>
+    <nav>
+    <a href = "/">Home</a> | <a href ="/signup">SignUp</a> | <a href ="/login">Login</a>
+    </nav>
+    <h1>All Shortened URLs</h1>
+    <form method="POST" action="/url">
+    <label>Enter URL to shorten:</label>
+    <input type="text" name="url" placeholder="Enter URL here"/>
+    <button type="submit">Shorten URL</button>
+    </form>
+    <ol>
+    <% urls.forEach( url => { %>
+        <li>
+            Original URL: <a href="<%= url.originalUrl %>"  target="_blank"><%= url.originalUrl %></a> | 
+            Shortened URL ID: <a href="<%= url.shortID %>" target="_blank" ><%= url.shortID %></a> 
+        </li>
+    <% }) %>
+    </ol>
+
+    </body>
+    <br>
+    <footer>&copy;URL Shortener</footer>
+    <script>
+    document.querySelector('form').addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        const url = e.target.url.value;
+        const res = await fetch('/url',{
+            method : 'POST',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify({url})
+        });
+        const data = await res.json();
+        alert('Shortened URL ID: ' + data.shortId);
+        window.location.reload();
+    });
+
+    </script>
+    </html>
